@@ -36,7 +36,10 @@ const uint8_t PIN_OUTPUT_LED_B = 4;
 // Initial setup.
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void setup(void) {
-  Serial.begin(9600);
+  ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  // Hard delay in case of DC power chatter or rapid connect/disconnect of power.
+  ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  delay(3000);
   ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   softwarePwmBegin();
   ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -47,10 +50,6 @@ void setup(void) {
     Serial.println("== New Session ==");
     Serial.println("=================");
   }
-  ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  // Hard delay in case of DC power chatter or rapid connect/disconnect of power.
-  ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  delayInternalSeconds(1, NULL);
 }
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Main program loop.
@@ -62,47 +61,47 @@ void loop(void) {
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Gamma corrected fade test for each channel.
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void softwarePwmTest(uint16_t usDelay) {
+void softwarePwmTest(uint16_t usPwmDelayUs) {
   uint16_t usI = 0;
   ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   for (; usI < GAMMA_CHANNEL_MAX_VALUES; usI++) {
     softwarePwmAnalogWrite(PIN_OUTPUT_LED_R, gammaCorrectedRed(usI));
-    delayInternalMicroseconds(usDelay, interruptHandler);
+    delayInternalMicroseconds(usPwmDelayUs, interruptHandler);
   }
   for (usI = GAMMA_CHANNEL_MAX_VALUES - 1; usI > 0; usI--) {
     softwarePwmAnalogWrite(PIN_OUTPUT_LED_R, gammaCorrectedRed(usI));
-    delayInternalMicroseconds(usDelay, interruptHandler);
+    delayInternalMicroseconds(usPwmDelayUs, interruptHandler);
   }
   ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   for (; usI < GAMMA_CHANNEL_MAX_VALUES; usI++) {
     softwarePwmAnalogWrite(PIN_OUTPUT_LED_G, gammaCorrectedGreen(usI));
-    delayInternalMicroseconds(usDelay, interruptHandler);
+    delayInternalMicroseconds(usPwmDelayUs, interruptHandler);
   }
   for (usI = GAMMA_CHANNEL_MAX_VALUES - 1; usI > 0; usI--) {
     softwarePwmAnalogWrite(PIN_OUTPUT_LED_G, gammaCorrectedGreen(usI));
-    delayInternalMicroseconds(usDelay, interruptHandler);
+    delayInternalMicroseconds(usPwmDelayUs, interruptHandler);
   }
   ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   for (; usI < GAMMA_CHANNEL_MAX_VALUES; usI++) {
     softwarePwmAnalogWrite(PIN_OUTPUT_LED_B, gammaCorrectedBlue(usI));
-    delayInternalMicroseconds(usDelay, interruptHandler);
+    delayInternalMicroseconds(usPwmDelayUs, interruptHandler);
   }
   for (usI = GAMMA_CHANNEL_MAX_VALUES - 1; usI > 0; usI--) {
     softwarePwmAnalogWrite(PIN_OUTPUT_LED_B, gammaCorrectedBlue(usI));
-    delayInternalMicroseconds(usDelay, interruptHandler);
+    delayInternalMicroseconds(usPwmDelayUs, interruptHandler);
   }
   ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   for (; usI < GAMMA_CHANNEL_MAX_VALUES; usI++) {
     softwarePwmAnalogWrite(PIN_OUTPUT_LED_R, gammaCorrectedRed(usI));
     softwarePwmAnalogWrite(PIN_OUTPUT_LED_G, gammaCorrectedGreen(usI));
     softwarePwmAnalogWrite(PIN_OUTPUT_LED_B, gammaCorrectedBlue(usI));
-    delayInternalMicroseconds(usDelay, interruptHandler);
+    delayInternalMicroseconds(usPwmDelayUs, interruptHandler);
   }
   for (usI = GAMMA_CHANNEL_MAX_VALUES - 1; usI > 0; usI--) {
     softwarePwmAnalogWrite(PIN_OUTPUT_LED_R, gammaCorrectedRed(usI));
     softwarePwmAnalogWrite(PIN_OUTPUT_LED_G, gammaCorrectedGreen(usI));
     softwarePwmAnalogWrite(PIN_OUTPUT_LED_B, gammaCorrectedBlue(usI));
-    delayInternalMicroseconds(usDelay, interruptHandler);
+    delayInternalMicroseconds(usPwmDelayUs, interruptHandler);
   }
 }
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
