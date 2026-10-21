@@ -3,7 +3,6 @@
 A custom software PWM controller for an RGB LED pixel using an Arduino Nano, with gamma-corrected output. A test project for use with [Lumenary](https://github.com/Broosky/Lumenary) and others.
 
 > If you found this project useful, interesting, or worth keeping an eye on, consider giving it a ⭐️.
-> It helps others discover the project and motivates me to keep building and sharing more.
 
 ## 🔹 Construction
 
@@ -13,7 +12,7 @@ A custom software PWM controller for an RGB LED pixel using an Arduino Nano, wit
 
 ![Rev 1](<Schematics/Rev 1.png>)
 
-## 🔹 Rev 1
+## 🔹 V1.0.0 Firmware For Rev 1 Schematic
 
 - Initial release.
 
